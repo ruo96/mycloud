@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.wrh.cloud</groupId>
+    <artifactId>mycloud</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>mycloud</name>
+    <description>mycloud</description>
+
+
+    <modules>
+        <module>zuul-gate</module>
+        <module>gateway-gateway</module>
+    </modules>
+
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+        <java.version>1.8</java.version>
+        <hystrix-version>1.5.11</hystrix-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <skipTests>true</skipTests>
+        <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+        <spring-cloud-alibaba.version>2.2.5.RELEASE</spring-cloud-alibaba.version>
+        <spring-test.vesion>5.3.9</spring-test.vesion>
+        <pagehelper-starter.version>1.2.10</pagehelper-starter.version>
+        <pagehelper.version>5.1.8</pagehelper.version>
+        <druid.version>1.2.8</druid.version>
+        <hutool.version>4.5.7</hutool.version>
+        <swagger2.version>2.9.2</swagger2.version>
+        <knife4j.version>2.0.4</knife4j.version>
+        <mybatis-generator.version>1.3.7</mybatis-generator.version>
+        <mybatis.version>3.4.6</mybatis.version>
+        <mybatis-spring-boot-starter.version>2.0.0</mybatis-spring-boot-starter.version>
+        <mysql-connector.version>8.0.15</mysql-connector.version>
+        <clickhouse-connector.version>0.2.4</clickhouse-connector.version>
+        <spring-data-commons.version>2.1.5.RELEASE</spring-data-commons.version>
+        <spring-data-redis.version>2.4.5</spring-data-redis.version>
+        <jjwt.version>0.9.0</jjwt.version>
+        <aliyun-oss.version>2.5.0</aliyun-oss.version>
+        <logstash-logback.version>5.3</logstash-logback.version>
+        <nacos.version>1.4.2</nacos.version>
+        <open-feign.version>2.2.10.RELEASE</open-feign.version>
+        <feign-okhttp.version>11.0</feign-okhttp.version>
+        <okhttp.version>3.13.1</okhttp.version>
+        <jasypt.version>2.1.0</jasypt.version>
+        <dubbo.version>2.7.15</dubbo.version>
+        <spring-cloud-alibaba-seata.version>2.2.5.RELEASE</spring-cloud-alibaba-seata.version>
+        <seata.version>1.4.2</seata.version>
+        <maven.version>3.8.1</maven.version>
+        <spring-boot-maven.version>2.3.7.RELEASE</spring-boot-maven.version>
+        <fastjson.version>1.2.73</fastjson.version>
+        <commons-collection.version>4.2</commons-collection.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
+        <cat.version>3.0.0</cat.version>
+        <netty.version>4.0.24.Final</netty.version>
+        <commons-codec.version>1.15</commons-codec.version>
+        <httpclient.version>4.5.3</httpclient.version>
+        <game-prometheus.version>1.3.1</game-prometheus.version>
+        <config.version>2.4.0</config.version>
+        <pleiades.venus.logging.version>1.0.30.RELEASE</pleiades.venus.logging.version>
+        <joda-time.version>2.9.3</joda-time.version>
+        <gamebi-common.version>1.0-SNAPSHOT</gamebi-common.version>
+        <gamebi-mbg.version>1.0-SNAPSHOT</gamebi-mbg.version>
+        <gamebi-security.version>1.0-SNAPSHOT</gamebi-security.version>
+        <gamebi-rpc.version>1.0-SNAPSHOT</gamebi-rpc.version>
+        <validator.version>6.2.0.Final</validator.version>
+        <guava.version>30.1.1-jre</guava.version>
+        <gson.version>2.8.5</gson.version>
+        <admin-starter-server.version>2.1.5</admin-starter-server.version>
+        <pleiades-venus.version>1.0.30.RELEASE</pleiades-venus.version>
+        <asm.version>5.1</asm.version>
+        <cglib.version>2.2.2</cglib.version>
+        <scv-version>2.0</scv-version>
+    </properties>
+
+    <dependencies>
+        <!--actuator-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--aop-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!--spring-boot-starter-test-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--spring-boot-dependence-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--spring-cloud-alibaba-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+
+            <!--spring-cloud-alibaba-nacos-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.alibaba.nacos</groupId>
+                        <artifactId>nacos-client</artifactId>
+                    </exclusion>
+                    <!--                    <exclusion>-->
+                    <!--                        <artifactId>archaius-core</artifactId>-->
+                    <!--                        <groupId>com.netflix.archaius</groupId>-->
+                    <!--                    </exclusion>-->
+                </exclusions>
+            </dependency>
+            <!--用1.4.2版本nacos-client-->
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+
+            <!--dubbo-->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.spring</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>1.0.11</version>
+            </dependency>
+            <!--服务间通信组件OpenFeign -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${open-feign.version}</version>
+            </dependency>
+            <!--通信组件feign-okhttp -->
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-okhttp</artifactId>
+                <version>${feign-okhttp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+            <!--配置文件加密-->
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.version}</version>
+            </dependency>
+            <!--MyBatis分页插件starter-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-starter.version}</version>
+            </dependency>
+            <!--MyBatis分页插件-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+            <!--集成druid连接池-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--Hutool Java工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!--Swagger-UI API文档生产工具-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2.version}</version>
+                <!--                <exclusions>-->
+                <!--                    <exclusion>-->
+                <!--                        <groupId>io.swagger</groupId>-->
+                <!--                        <artifactId>swagger-annotations</artifactId>-->
+                <!--                    </exclusion>-->
+                <!--                    <exclusion>-->
+                <!--                        <groupId>io.swagger</groupId>-->
+                <!--                        <artifactId>swagger-models</artifactId>-->
+                <!--                    </exclusion>-->
+                <!--                </exclusions>-->
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <!--knife4j-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!-- MyBatis 生成器 -->
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>${mybatis-generator.version}</version>
+            </dependency>
+            <!-- MyBatis-->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <!--mybatis-spring-boot-starter-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+            <!--Mysql数据库驱动-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
+            <!--clickhouse数据库驱动-->
+            <dependency>
+                <groupId>ru.yandex.clickhouse</groupId>
+                <artifactId>clickhouse-jdbc</artifactId>
+                <version>${clickhouse-connector.version}</version>
+            </dependency>
+            <!--SpringData工具包-->
+            <!--            <dependency>-->
+            <!--                <groupId>org.springframework.data</groupId>-->
+            <!--                <artifactId>spring-data-commons</artifactId>-->
+            <!--                <version>${spring-data-commons.version}</version>-->
+            <!--            </dependency>-->
+            <!--JWT(Json Web Token)登录支持-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <!-- 阿里云OSS -->
+            <!--<dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun-oss.version}</version>
+            </dependency>-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collection.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <!--commons-codec-->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+            <!--httpclient-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+
+            <!--joda-time-->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda-time.version}</version>
+            </dependency>
+
+            <!-- cat -->
+            <dependency>
+                <groupId>com.dianping.cat</groupId>
+                <artifactId>cat-client</artifactId>
+                <version>${cat.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.unidal.framework</groupId>
+                <artifactId>foundation-service</artifactId>
+                <version>2.5.4</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <!-- cat -->
+
+
+            <!--pleiades.venus config-->
+            <!--<dependency>
+                <groupId>pleiades.venus</groupId>
+                <artifactId>starter</artifactId>
+                <version>${pleiades-venus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pleiades.venus.config</groupId>
+                <artifactId>paladin</artifactId>
+                <version>${pleiades-venus.version}</version>
+            </dependency>-->
+
+            <!--bili elk-->
+            <dependency>
+                <groupId>pleiades.venus</groupId>
+                <artifactId>logging</artifactId>
+                <version>${pleiades.venus.logging.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>asm</artifactId>
+                        <groupId>org.ow2.asm</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!--asm 解决引入billions-logback后引起的版本冲突-->
+            <dependency>
+                <artifactId>asm</artifactId>
+                <groupId>org.ow2.asm</groupId>
+                <version>${asm.version}</version>
+            </dependency>
+            <!--日志系统 end-->
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>asm</artifactId>
+                        <groupId>asm</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!--hibernate-validator-->
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${validator.version}</version>
+            </dependency>
+
+            <!--guava-->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+            <!--集成SpringBoot Admin监控-->
+            <!--<dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${admin-starter-server.version}</version>
+            </dependency>-->
+            <dependency>
+                <groupId>net.sourceforge.javacsv</groupId>
+                <artifactId>javacsv</artifactId>
+                <version>${scv-version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

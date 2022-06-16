@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: zuul-gate
+
+server:
+  port: 2080
+
+zuul:
+  routes:
+    baidu:
+      path: /baidu/**
+      url: https://www.baidu.com/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
