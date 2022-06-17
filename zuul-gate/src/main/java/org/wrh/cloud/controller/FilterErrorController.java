@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
+public class FilterErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
     @Autowired
     private ErrorAttributes errorAttributes;
 
