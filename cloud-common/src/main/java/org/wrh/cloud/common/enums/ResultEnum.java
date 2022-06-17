@@ -11,7 +11,8 @@ public enum ResultEnum {
     FAIL(1000,"fail"),
     FILTER_ERROR(1001,"filter error"),
     SERVER_ERROR(1002,"server error"),
-    FILTER_ERROR_RESP(1003,"filter-error-response");
+    FILTER_ERROR_RESP(1003,"filter-error-response"),
+    GATEWAY_FALL_BACK_ERROR(1004,"gateway fallback error");
 
     private Integer code;
     private String msg;

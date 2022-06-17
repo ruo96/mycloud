@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -19,7 +20,7 @@ import java.time.LocalDateTime;
 public class GlobalFilterConfig {
     @Bean
     @Order(-1)
-    public GlobalFilter a() {
+    public GlobalFilter a() throws Exception {
         return ((exchange, chain) -> {
             log.info("[GlobalFilter - a  forward]>>> time: {}", LocalDateTime.now().toString());
             return chain.filter(exchange).then(Mono.fromRunnable(()->{

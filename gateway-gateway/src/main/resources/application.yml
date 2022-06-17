@@ -9,6 +9,27 @@ spring:
         locator:
           # 请求服务名称可以用小写
           lower-case-service-id: true
+
+      #测试环境暂不需要设置
+      globalcors:
+        cors-configurations:
+          '[/**]': # 匹配所有请求
+            allowedOrigins: #设置支持的域名
+              - "http://game-bi-test.bilibili.co"
+              - "http://game-bi.bilibili.co"
+              - "http://local.bilibili.co"
+              - "http://data-center-pro.bilibili.co"
+              - "http://data-center-pro-test.bilibili.co"
+              - "http://game-bi-web.bilibili.co"
+            allowedHeaders: "*" # 支持的方法
+            allowCredentials: true # 设置允许携带cookie，为true时allowedOrigins不允许为*会报错
+            allowedMethods: # 支持的方法
+              - GET
+              - POST
+              - PUT
+              - OPTIONS
+              - DELETE
+              - PATCH
       routes:
 #        - id: cloud-user
 #          uri: lb://cloud-user
@@ -26,7 +47,7 @@ spring:
         - id: customer-route
           uri: lb://cloud-user
           predicates:
-            - Path=/user/order/**
+            - Path=/user/**
             - AgeAuth=18,60
 #            - name: CheckAuth
 #              args:
@@ -39,6 +60,17 @@ spring:
           filters:
             - StripPrefix=1 # 转发前去掉一层路径
             - Log=true,true
+#       熔断测试
+        - id: user-service
+          uri: lb://cloud-user
+          predicates:
+            - Path=/hystrix/**
+          filters:
+#            - StripPrefix=1 # 转发前去掉一层路径
+            name: Hystrix
+            args:
+              name: fallbackcmd
+              fallbackUrl: forward:/fallback
 
 server:
   port: 9999

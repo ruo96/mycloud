@@ -51,6 +51,8 @@ public class AgeAuthRoutePredicateFactory extends AbstractRoutePredicateFactory<
                     log.info("[AgeAuthRoutePredicateFactory]>>> age match: {}", age);
                     int iAge = Integer.parseInt(age);
                     if (iAge >= config.minAge && iAge < config.maxAge) {
+                        /** 手动制造异常检测*/
+                        // int i = 1 / 0;
                         return true;
                     }
                 }
