@@ -11,6 +11,13 @@ zuul:
       path: /baidu/**
 #      url: http://localhost:2080/self/ask
       url: forward:/self/ask/
+#    error:
+#      path: /error/**
+#      url: forward:/self/error/
+    common:
+      path: /common/**
+      url: forward:/self/common/
+  retryable: false
 
 management:
   endpoints:
