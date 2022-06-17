@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+  #    loadbalancer:
+  #      ribbon:
+  #        #use ReactorLoadBalancerExchangeFilterFunction
+  #        enabled: false
+
+
+logging:
+  level:
+    org.wrh.cloud.user: debug

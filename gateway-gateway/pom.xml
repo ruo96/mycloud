@@ -10,10 +10,117 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>gateway-gateway</artifactId>
+    <packaging>jar</packaging>
+    <name>gateway-gateway</name>
+    <description>网关服务</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <gateway.version>2.2.5.RELEASE</gateway.version>
     </properties>
+
+<dependencies>
+    <!--引入common模块-->
+    <dependency>
+        <groupId>org.wrh.cloud</groupId>
+        <artifactId>cloud-common</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <!--spring-cloud-alibaba-nacos-->
+    <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+    </dependency>
+    <!--nacos-client-->
+    <dependency>
+        <groupId>com.alibaba.nacos</groupId>
+        <artifactId>nacos-client</artifactId>
+    </dependency>
+    <!--gateway-->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-gateway</artifactId>
+        <version>${gateway.version}</version>
+        <exclusions>
+            <!--去除spring-boot-start，与Gateway使用的WebFlux冲突-->
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <!--Spring Cloud 2020 中重磅推荐的负载均衡器 Spring Cloud LoadBalancer 不引用无法实现动态路由-->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        <version>${gateway.version}</version>
+    </dependency>
+
+    <!--hystrix熔断器-->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        <version>${gateway.version}</version>
+    </dependency>
+    <!--服务间通信组件OpenFeign -->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-openfeign</artifactId>
+    </dependency>
+    <!--通信组件feign-okhttp -->
+    <dependency>
+        <groupId>io.github.openfeign</groupId>
+        <artifactId>feign-okhttp</artifactId>
+    </dependency>
+
+    <!--        <dependency>-->
+    <!--            <groupId>io.jsonwebtoken</groupId>-->
+    <!--            <artifactId>jjwt</artifactId>-->
+    <!--        </dependency>-->
+
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+    </dependency>
+</dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.version}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-maven.version}</version>
+                <configuration>
+                    <mainClass>org.wrh.cloud.gateway.GatewayApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

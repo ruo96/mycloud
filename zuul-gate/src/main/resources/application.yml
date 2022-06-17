@@ -3,7 +3,7 @@ spring:
     name: zuul-gate
 
 server:
-  port: 2080
+  port: 2020
 
 zuul:
   routes:
@@ -17,6 +17,9 @@ zuul:
     common:
       path: /common/**
       url: forward:/self/common/
+    user:
+      path: /user/**
+      url: localhost:8900/user/
   retryable: false
 
 management:

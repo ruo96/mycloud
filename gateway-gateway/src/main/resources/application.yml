@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: cloud-gateway
+  profiles:
+    active: dev
+  cloud:
+    gateway:
+      routes:
+        - id: cloud-user
+          uri: lb://cloud-user
+          predicates:
+            - Path=/user/**
+
+server:
+  port: 9999
+
+
+    routes:
+      #主页
+      - id: report
+        uri: lb://bi-report
+        predicates:
+          ##首页菜单等路由
+          - Path=/portal/v1/bi/**,/home/v1/bi/**
+          #- Header=Authorization,Bear**

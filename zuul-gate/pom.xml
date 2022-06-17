@@ -17,6 +17,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <gateway.version>2.2.5.RELEASE</gateway.version>
     </properties>
 
     <dependencies>
@@ -29,6 +30,28 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
             <version>2.2.10.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+            <version>2.2.10.RELEASE</version>
+        </dependency>
+        <!--Spring Cloud 2020 中重磅推荐的负载均衡器 Spring Cloud LoadBalancer 不引用无法实现动态路由-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+            <version>${gateway.version}</version>
+        </dependency>
+        <!--hystrix熔断器-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <version>${gateway.version}</version>
+        </dependency>
+        <!--服务间通信组件OpenFeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <!--spring-boot-starter-web-->
         <!--<dependency>
@@ -62,15 +85,15 @@
         </dependency>
 
         <!--spring-cloud-alibaba-nacos-->
-        <!--<dependency>
+        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        &lt;!&ndash;用1.4.2版本nacos-client&ndash;&gt;
+        <!--用1.4.2版本nacos-client-->
         <dependency>
             <groupId>com.alibaba.nacos</groupId>
             <artifactId>nacos-client</artifactId>
-        </dependency>-->
+        </dependency>
         <!--服务间通信组件OpenFeign -->
         <!--<dependency>
             <groupId>org.springframework.cloud</groupId>

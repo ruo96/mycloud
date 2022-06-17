@@ -38,7 +38,7 @@ public class ParamFilter extends ZuulFilter {
         String name = ctx.getRequest().getParameter("name");
         String wanted = ctx.getRequest().getParameter("wanted");
         log.info("[1]>>> filter name: {}",name);
-        if (name.equals("wrh")) {
+        if (StringUtils.isNotBlank(name) && name.equals("wanted")) {
             ctx.setSendZuulResponse(false);
             ctx.set("sendForwardFilter.ran", true);
             ctx.set("isSuccess", false);

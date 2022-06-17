@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: cloud-user
+  profiles:
+    active: dev
+
+server:
+  port: 20000
