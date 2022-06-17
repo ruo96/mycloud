@@ -1,8 +1,13 @@
-spring:
-  application:
-    name: cloud-user
-  profiles:
-    active: dev
+#spring:
+#  application:
+#    name: cloud-user
+#  profiles:
+#    active: dev
 
 server:
   port: 20000
+
+user:
+  hobby: car
+
+hobby: car

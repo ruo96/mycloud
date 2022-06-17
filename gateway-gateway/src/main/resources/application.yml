@@ -15,12 +15,8 @@ spring:
         cors-configurations:
           '[/**]': # 匹配所有请求
             allowedOrigins: #设置支持的域名
-              - "http://game-bi-test.bilibili.co"
-              - "http://game-bi.bilibili.co"
-              - "http://local.bilibili.co"
-              - "http://data-center-pro.bilibili.co"
-              - "http://data-center-pro-test.bilibili.co"
-              - "http://game-bi-web.bilibili.co"
+              - "http://service1.bb.co"
+              - "http://service2.bb.co"
             allowedHeaders: "*" # 支持的方法
             allowCredentials: true # 设置允许携带cookie，为true时allowedOrigins不允许为*会报错
             allowedMethods: # 支持的方法
