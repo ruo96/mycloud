@@ -45,7 +45,7 @@
         <mysql-connector.version>8.0.15</mysql-connector.version>
         <clickhouse-connector.version>0.2.4</clickhouse-connector.version>
         <spring-data-commons.version>2.1.5.RELEASE</spring-data-commons.version>
-        <spring-data-redis.version>2.4.5</spring-data-redis.version>
+        <spring-data-redis.version>2.3.7.RELEASE</spring-data-redis.version>
         <jjwt.version>0.9.0</jjwt.version>
         <aliyun-oss.version>2.5.0</aliyun-oss.version>
         <logstash-logback.version>5.3</logstash-logback.version>
@@ -156,6 +156,12 @@
                 <groupId>com.alibaba.nacos</groupId>
                 <artifactId>nacos-client</artifactId>
                 <version>${nacos.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-data-redis.version}</version>
             </dependency>
 
             <!--dubbo-->

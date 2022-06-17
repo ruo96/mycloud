@@ -9,6 +9,10 @@ spring:
   #      ribbon:
   #        #use ReactorLoadBalancerExchangeFilterFunction
   #        enabled: false
+  redis:
+    host: 127.0.0.1
+    password:
+    port: 6379
 
 
 logging:

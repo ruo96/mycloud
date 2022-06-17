@@ -9,6 +9,16 @@ spring:
   #      ribbon:
   #        #use ReactorLoadBalancerExchangeFilterFunction
   #        enabled: false
+  redis:
+    host: 127.0.0.1
+    password:
+    port: 6379
+    jedis:
+      pool:
+        max-active: 10
+        max-idle: 10
+        max-wait: -1
+        min-idle: 10
 
 
 logging:
