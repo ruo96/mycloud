@@ -5,21 +5,40 @@ spring:
     active: dev
   cloud:
     gateway:
+      discovery:
+        locator:
+          # 请求服务名称可以用小写
+          lower-case-service-id: true
       routes:
-        - id: cloud-user
+#        - id: cloud-user
+#          uri: lb://cloud-user
+#          predicates:
+#            - Path=/user/**
+#        - id: cloud-order
+#          uri: lb://cloud-order
+#          predicates:
+#            - Query=foo, ba
+#        - id: redirect-baidu
+#          uri: http://www.baidu.com
+#          predicates:
+#            - Method=GET
+        # 自定义路由断言工厂 那个args的地方是真的坑， 位置不对不对齐就不行 但是为什么不生效
+        - id: customer-route
           uri: lb://cloud-user
           predicates:
-            - Path=/user/**
+            - Path=/user/order/**
+            - AgeAuth=18,60
+#            - name: CheckAuth
+#              args:
+#                name: killer1
+        - id: order-route
+          uri: lb://cloud-order
+          order: 1
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1 # 转发前去掉一层路径
+            - Log=true,true
 
 server:
   port: 9999
-
-
-    routes:
-      #主页
-      - id: report
-        uri: lb://bi-report
-        predicates:
-          ##首页菜单等路由
-          - Path=/portal/v1/bi/**,/home/v1/bi/**
-          #- Header=Authorization,Bear**
