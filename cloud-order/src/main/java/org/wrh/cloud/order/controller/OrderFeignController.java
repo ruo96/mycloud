@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.wrh.cloud.common.dto.ReturnResult;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author wuruohong
@@ -22,8 +23,9 @@ public class OrderFeignController {
     private static final Logger log = LoggerFactory.getLogger(OrderFeignController.class);
 
     @GetMapping("info")
-    public ReturnResult getInfo(@RequestParam("userName") String userName) {
+    public ReturnResult getInfo(@RequestParam("userName") String userName) throws InterruptedException {
         log.info("[order-feign-service]>>> hello :{} this is feigin controller {}", userName, LocalDateTime.now().toString());
+        TimeUnit.SECONDS.sleep(20);
         return ReturnResult.success(Lists.newArrayList("hello",userName,"come here!"));
     }
 }

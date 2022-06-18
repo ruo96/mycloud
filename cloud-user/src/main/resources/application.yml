@@ -18,3 +18,51 @@ spring:
       rate: 100 # 指定采样比例，默认10%
     messaging:
       enabled: true
+
+#okhttp:
+#  connectTimeout: 3000
+#  readTimeout: 4000
+#  keepAliveDuration: 300
+#  maxIdleConnections: 5
+
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeOut: 200
+        #指建立连接后从服务端读取到可用资源所用的时间   这个时间和下面的hystrix比较，哪个小就先满足那个，产生异常
+        readTimeOut: 7000
+
+hystrix:
+  threshold: 20
+  sleep: 20000
+  thresholdPercentage: 50
+  threads: 30
+  fallbackAccepts: 500
+  command:
+    default:
+      execution:
+        timeout:
+          enable: true
+        isolation:
+          #          #保证feign调用header不丢失     这个时间一定要配置，实在是太坑了啊， 默认的1秒啊
+          #          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 10000
+
+#设置feign客户端超时时间（openfeign默认支持ribbon）
+ribbon:
+  #指的是建立连接后从服务器读取到可用资源所用的时间，下面的是设置为5秒
+  ReadTimeout: 5000
+  #指的是建立连接所需要的时间，适用于网络状况良好，两端连接所用的时间
+  ConnectTimeout: 5000
+
+logging:
+  level:
+    org.wrh.cloud.common.feignService.OrderFeignClient: DEBUG

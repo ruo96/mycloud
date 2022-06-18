@@ -11,6 +11,7 @@ import org.wrh.cloud.common.dto.ReturnResult;
 import org.wrh.cloud.common.feignService.OrderFeignClient;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 
 
 /**
@@ -27,9 +28,9 @@ public class FeignController {
 
     @GetMapping("feign/info")
     public ReturnResult getInfo(@RequestParam("name") String name) {
-        log.info("[feign-user]>>> name: {}", name);
+        log.info("[feign-user]>>> name: {}  time:{}", name, LocalDateTime.now().toString());
         ReturnResult result = orderFeignClient.getOrderList(name);
-        log.info("[feign-user]>>> return: {}", result);
+        log.info("[feign-user]>>> return: {} time:{}", result, LocalDateTime.now().toString());
         return result;
 
     }

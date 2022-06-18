@@ -3,6 +3,7 @@ package org.wrh.cloud.common.feignService;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.wrh.cloud.common.config.FeignConfiguration;
 import org.wrh.cloud.common.dto.ReturnResult;
 
 /**
@@ -12,7 +13,9 @@ import org.wrh.cloud.common.dto.ReturnResult;
 // @FeignClient(name = "bi-crowd",
 //         configuration = FeignConfiguration.class,
 //         fallbackFactory = CrowdAnalyseFeignClientHystrixFallbackFactory.class)
-@FeignClient(name = "cloud-order")
+@FeignClient(name = "cloud-order",
+        configuration = FeignConfiguration.class,
+        fallbackFactory = OrderFeignClientHystrixFallbackFactory.class)
 public interface OrderFeignClient {
 
     @GetMapping(value = "/feign/info")
