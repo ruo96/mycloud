@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <property name="LOG_HOME" value="d:/data/logs/cloud-user/${HOSTNAME}"/>
+    <property name="APP_HOME" value="cloud-user"/>
+
+    <property name="MSG_PATTERN" value="%d{ISO8601} -- %X{request-id} | %msg  %n"/>
+    <property name="NORMAL_PATTERN" value="%d{ISO8601} : %-5level -- %-50.50logger -- %msg | %X{request-id} %n"/>
+    <property name="SERIOUS_PATTERN" value="%d{ISO8601} [%-16.16thread] cloud-user: %-5level -- %-60.60class [%4line] -- %msg | %X{request-id} %n" />
+
+    <timestamp key="byDay" datePattern="yyyyMMdd"/>
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+
+<!--    appender有三种类型，ConsoleAppender(输出到控制台), FileAppender(日志添加到文件), RollingFileAppender(日志输出到文件并且定期进行清理)-->
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+<!--        -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+<!--        这个是ConsoleAppender需要的配置的子节点  encoder：用于对日志的格式进行格式化-->
+        <encoder>
+            <pattern>${SERIOUS_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+<!--        RollingFileAppender需要配置的子节点，file用于控制文件的输出路径-->
+        <file>${LOG_HOME}/debug.log</file>
+<!--        滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+<!--            用于格式化根据时间滚动的日志的名称-->
+            <fileNamePattern>${LOG_HOME}/debug.%d{yyyyMMdd}.log.gz</fileNamePattern>
+<!--            用于设置日志的清理周期，超过数量就删除最旧的文件-->
+            <MaxHistory>7</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${SERIOUS_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${LOG_HOME}/info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/info.%d{yyyyMMdd}.log.gz</fileNamePattern>
+            <MaxHistory>7</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${NORMAL_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- special level -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <file>${LOG_HOME}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/error.%d{yyyyMMdd}.log.gz</fileNamePattern>
+            <MaxHistory>7</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${SERIOUS_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 记录详细接口调用日志 begin -->
+    <appender name="api_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/stat/current/api.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/stat/history/api.%d{yyyyMMdd}.log.gz</fileNamePattern>
+            <MaxHistory>7</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${MSG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="async_api_log" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>256</queueSize>
+        <appender-ref ref="api_log"/>
+    </appender>
+
+    <appender name="api_client_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/stat/current/api_client.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/stat/history/api_client.%d{yyyyMMdd}.log.gz</fileNamePattern>
+            <MaxHistory>7</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${MSG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="async_api_client_log" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>256</queueSize>
+        <appender-ref ref="api_client_log"/>
+    </appender>
+
+
+<!--    子节点log用于设置某一个包的日志的打印级别，以及指定appender level用来设置打印级别，大小写无关， additivity用于设置是否箱上一级logger传递打印信息-->
+    <logger name="api" level="INFO" additivity="false">
+        <appender-ref ref="async_api_log"/>
+    </logger>
+
+    <!-- for debug , developers. -->
+    <logger name="com.google.code" level="ERROR">
+        <appender-ref ref="ERROR"/>
+    </logger>
+
+    <logger name="org.apache" level="ERROR">
+        <appender-ref ref="ERROR"/>
+    </logger>
+    <logger name="org.dbunit" level="ERROR">
+        <appender-ref ref="ERROR"/>
+    </logger>
+    <logger name="org.quartz" level="ERROR">
+        <appender-ref ref="ERROR"/>
+    </logger>
+    <logger name="net.sf.ehcache" level="ERROR">
+        <appender-ref ref="ERROR"/>
+    </logger> 
+    <!-- for debug , developers. end -->
+
+<!--    root是所有logger的上级-->
+    <root level="INFO">
+<!--        指定默认的日志输出-->
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="INFO"/>
+        <!-- APP_ERROR: WARN ERROR OFF -->
+        <appender-ref ref="ERROR"/>
+    </root>
+</configuration>

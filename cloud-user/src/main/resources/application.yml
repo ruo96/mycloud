@@ -5,9 +5,16 @@
 #    active: dev
 
 server:
-  port: 20000
+  port: 20005
 
 user:
   hobby: car
 
 hobby: car
+
+spring:
+  sleuth:
+    sampler:
+      rate: 100 # 指定采样比例，默认10%
+    messaging:
+      enabled: true

@@ -53,6 +53,11 @@
             <groupId>com.alibaba.nacos</groupId>
             <artifactId>nacos-client</artifactId>
         </dependency>
+        <!--引入sleuth  日志追踪-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
         <!--服务间通信组件OpenFeign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -73,6 +78,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <!--            <scope>test</scope>-->
         </dependency>
 
     </dependencies>

@@ -121,6 +121,12 @@
             <artifactId>javacsv</artifactId>
         </dependency>
 
+        <!--服务间通信组件OpenFeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

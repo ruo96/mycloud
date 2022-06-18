@@ -1,6 +1,8 @@
 package org.wrh.cloud.user.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -19,10 +21,12 @@ import java.util.List;
  * @author wuruohong
  * @date 2022-06-17 12:48
  */
-@Slf4j
+// @Slf4j
 @RestController
 @RequestMapping("user/")
 public class UserInfoController {
+    
+    private static final Logger log = LoggerFactory.getLogger(UserInfoController.class);
 
     @Autowired
     private RestTemplate restTemplate;
@@ -39,6 +43,7 @@ public class UserInfoController {
 
     @GetMapping("order/{str}")
     public String addOrder(@PathVariable String str) {
+        log.info("[list user]>>> {}", LocalDateTime.now().toString());
         return restTemplate.getForObject("http://cloud-order/order/add/" + str, String.class);
     }
 

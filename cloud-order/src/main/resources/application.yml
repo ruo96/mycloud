@@ -3,6 +3,14 @@ spring:
     name: cloud-order
   profiles:
     active: dev
+  sleuth:
+    sampler:
+      rate: 100 # 指定采样比例，默认10%
+    messaging:
+      enabled: true
 
 server:
   port: 20001
+
+
+

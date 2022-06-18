@@ -47,6 +47,11 @@
             <groupId>com.alibaba.nacos</groupId>
             <artifactId>nacos-client</artifactId>
         </dependency>
+        <!--引入sleuth  日志追踪-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
         <!--服务间通信组件OpenFeign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

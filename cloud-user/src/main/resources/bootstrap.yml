@@ -9,11 +9,17 @@ spring:
         server-addr: 127.0.0.1:8848
         username: nacos
         password: nacos
+#        group: group1
+#        namespace: 8dd1b86e-8df4-4608-8e9a-a68b77bc49d0
+      #        ephemeral: false
       config:
         server-addr: 127.0.0.1:8848
         username: nacos
         password: nacos
         file-extension: yml
+#        group: group1
+#        namespace: 8dd1b86e-8df4-4608-8e9a-a68b77bc49d0
+
 
 #        注意springboot2.4.0之后，就不支持bootstrap了
 # 所以之后的版本在application.yml需要做的变动如下：

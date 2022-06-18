@@ -65,6 +65,12 @@
         <version>${gateway.version}</version>
     </dependency>
 
+    <!--引入sleuth  日志追踪-->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-sleuth</artifactId>
+    </dependency>
+
     <!--hystrix熔断器-->
     <dependency>
         <groupId>org.springframework.cloud</groupId>
