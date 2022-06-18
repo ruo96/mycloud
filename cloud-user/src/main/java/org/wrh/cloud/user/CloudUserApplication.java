@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author wuruohong
  * @date 2022-06-17 12:47
  */
+@EnableScheduling
 @EnableFeignClients(basePackages = "org.wrh.cloud.common.feignService")
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = "org.wrh.cloud")
