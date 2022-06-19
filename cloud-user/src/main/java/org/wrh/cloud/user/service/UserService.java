@@ -9,4 +9,6 @@ import org.wrh.cloud.common.dto.ReturnResult;
 public interface UserService {
 
     ReturnResult getUserInfo(Integer userId);
+
+    ReturnResult getUserList();
 }

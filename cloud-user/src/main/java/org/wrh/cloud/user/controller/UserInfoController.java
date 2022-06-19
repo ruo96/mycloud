@@ -41,10 +41,8 @@ public class UserInfoController {
     @GetMapping("list")
     public ReturnResult listUsers() {
         log.info("[list user]>>> {}", LocalDateTime.now().toString());
-        List<User> list = new ArrayList<>();
-        list.add(User.builder().name("w1").age(18).sex("male").build());
-        list.add(User.builder().name("r1").age(18).sex("female").build());
-        return ReturnResult.success(list);
+
+        return ReturnResult.success(userService.getUserList());
     }
 
 

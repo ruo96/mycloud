@@ -36,7 +36,7 @@ feign:
     config:
       default:
         connectTimeOut: 200
-        #指建立连接后从服务端读取到可用资源所用的时间   这个时间和下面的hystrix比较，哪个小就先满足那个，产生异常
+        #指建立连接后从服务端读取到可用资源所用的时间   这个时间和下面的hystrix比较，哪个小就先满足那个，产生异常 这个地方很坑，要小心
         readTimeOut: 7000
 
 hystrix:

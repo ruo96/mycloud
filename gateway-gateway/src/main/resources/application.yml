@@ -26,7 +26,48 @@ spring:
               - OPTIONS
               - DELETE
               - PATCH
+      default-filters:
+        #解决双重跨域
+#        - DedupeResponseHeader=Vary Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+        - name: Hystrix
+          args:
+            name: fallbackcmd #HystrixCmommand的名字
+            fallbackUri: forward:/fallback #fallback名字的URI
+
+#      default-filters:
+#        - name: RequestRateLimiter
+#          args:
+#            redis-rate-limiter.replenishRate: 2
+#            #              令牌桶的容量 桶内能装200个令牌，相当于峰值，要注意的是：第一秒从桶内能去200个，但是第二秒只能取到100个了，因为入桶速度是每秒100
+#            redis-rate-limit.burstCapacity: 20
+#            # 每个请求需要的令牌数
+#            redis-rate-limiter.requestedTokens: 1
+#            key-resolver: "#{@apiKeyResolver}"
       routes:
+#       ##############################################################################################################
+        # 限流测试
+        - id: customer1-route
+          uri: lb://cloud-user
+          predicates:
+            - Path=/limiter/**
+          filters:
+            - RewritePath=/limiter, /user
+            # 转发前去掉一层路径
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+              #              允许用户每秒处理多少请求  # 令牌入桶的速度为每秒2个，相当于QPS
+                redis-rate-limiter:
+                  replenish-rate: 5
+              #              令牌桶的容量 桶内能装200个令牌，相当于峰值，要注意的是：第一秒从桶内能去200个，但是第二秒只能取到100个了，因为入桶速度是每秒100
+                  burst-capacity: 10
+              # 每个请求需要的令牌数
+                  requested-tokens: 1
+                  key-resolver: "#{@apiKeyResolver}"
+        #              rate-limiter: "#{@defaultRateLimiter}"
+        #              key-resolver: "#{@hostAddKeyResolver}"
+        #              default-rate-limit.permitsPerSecond: 1
+#       ##############################################################################################################
 #        - id: cloud-user
 #          uri: lb://cloud-user
 #          predicates:
@@ -67,6 +108,39 @@ spring:
             args:
               name: fallbackcmd
               fallbackUrl: forward:/fallback
+#      redis-rate-limiter:
+#        config:
+#            replenishRate: 1
+#            #              令牌桶的容量 桶内能装200个令牌，相当于峰值，要注意的是：第一秒从桶内能去200个，但是第二秒只能取到100个了，因为入桶速度是每秒100
+#            burstCapacity: 5
+#            # 每个请求需要的令牌数
+#            requestedTokens: 1
+#            key-resolver: "#{@apiKeyResolver}"
+
 
 server:
   port: 9999
+
+#熔断参数配置
+hystrix:
+  threshold: 20
+  command:
+    default:
+      execution:
+        timeout:
+          enable: true
+        isolation:
+          #保证feign调用header不丢失
+          #          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 5000
+    fallbackcmd:
+      execution:
+        timeout:
+          enable: true
+        isolation:
+          #          #保证feign调用header不丢失
+          #          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 5000
+

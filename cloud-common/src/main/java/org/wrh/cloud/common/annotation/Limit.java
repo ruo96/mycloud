@@ -32,7 +32,7 @@ public @interface Limit {
     /**
      * 获取令牌最大等待时间,单位(例:分钟/秒/毫秒) 默认:毫秒
      */
-    TimeUnit timeunit() default TimeUnit.MICROSECONDS;
+    TimeUnit timeunit() default TimeUnit.MILLISECONDS;
 
     /**
      * 得不到令牌的提示语
