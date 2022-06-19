@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@Component
+// @Component
 public class ScheduleTaskNew implements SchedulingConfigurer {
 
     private static final Logger logger = LoggerFactory.getLogger(ScheduleTaskNew.class);

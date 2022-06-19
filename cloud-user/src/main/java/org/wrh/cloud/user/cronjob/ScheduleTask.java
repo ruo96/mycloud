@@ -15,8 +15,8 @@ import reactor.core.publisher.Flux;
 import java.time.LocalDateTime;
 
 
-@RefreshScope
-@Component
+// @RefreshScope
+// @Component
 public class ScheduleTask {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ScheduleTask.class);
